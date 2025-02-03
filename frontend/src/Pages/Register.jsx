@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa"; // React Icon for user add
 import { Link, useNavigate } from "react-router-dom";
+import register from '../services/authService'
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ const Register = () => {
 
     // Send data to the backend API
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", { name, email, password });
+      const res = await register({ name, email, password });
       navigate("/login"); // Navigate to the login page after successful registration
     } catch (error) {
       console.error("Registration failed:", error.response?.data?.message || "Error");
